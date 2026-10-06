@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zafran — Bold Indian Cafe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --saffron: #FF6B00;
+      --turmeric: #FFB800;
+      --rose:     #E8003D;
+      --cream:    #FFF8EE;
+      --charcoal: #1A1208;
+      --mint:     #00B388;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: var(--charcoal);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 900;
+      color: var(--turmeric);
+      letter-spacing: -1px;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--cream);
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--turmeric); }
+    .nav-cta {
+      background: var(--saffron); color: #fff;
+      padding: 0.6rem 1.5rem; border-radius: 2rem;
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--rose); transform: scale(1.04); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+      background: var(--charcoal);
+      overflow: hidden;
+    }
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 3rem 5rem 5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-tag {
+      display: inline-block; width: fit-content;
+      background: var(--rose); color: #fff;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; padding: 0.35rem 1rem;
+      border-radius: 2rem; margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 900;
+      color: var(--cream); line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title span { color: var(--turmeric); }
+    .hero-sub {
+      color: #aaa; font-size: 1.05rem; line-height: 1.7;
+      max-width: 420px; margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--saffron); color: #fff;
+      padding: 0.85rem 2rem; border-radius: 2rem;
+      font-weight: 600; font-size: 1rem;
+      text-decoration: none; transition: transform 0.2s, background 0.2s;
+    }
+    .btn-primary:hover { background: var(--rose); transform: scale(1.04); }
+    .btn-outline {
+      border: 2px solid var(--turmeric); color: var(--turmeric);
+      padding: 0.85rem 2rem; border-radius: 2rem;
+      font-weight: 600; font-size: 1rem;
+      text-decoration: none; transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--turmeric); color: var(--charcoal); }
+
+    .hero-visual {
+      position: relative; overflow: hidden;
+      animation: fadeIn 1.2s ease both;
+    }
+    .hero-visual img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.85) saturate(1.3);
+    }
+    .hero-badge {
+      position: absolute; bottom: 2.5rem; left: -1.5rem;
+      background: var(--turmeric);
+      padding: 1rem 1.5rem; border-radius: 1rem;
+      box-shadow: 4px 4px 0 var(--saffron);
+    }
+    .hero-badge strong { display: block; font-size: 1.6rem; font-weight: 900; color: var(--charcoal); }
+    .hero-badge span { font-size: 0.8rem; font-weight: 600; color: var(--charcoal); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--saffron);
+      display: flex; justify-content: center; gap: 5rem;
+      padding: 2rem 4rem; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; font-weight: 900; color: #fff;
+      display: block;
+    }
+    .stat-label { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 5rem; }
+    .section-tag {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--saffron);
+      margin-bottom: 0.75rem; display: block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 900;
+      line-height: 1.15; color: var(--charcoal);
+    }
+    .section-title span { color: var(--saffron); }
+
+    /* ── MENU ── */
+    #menu { background: var(--cream); }
+    .menu-header { text-align: center; margin-bottom: 3.5rem; }
+    .menu-tabs {
+      display: flex; justify-content: center; gap: 0.75rem;
+      margin-top: 1.5rem; flex-wrap: wrap;
+    }
+    .tab {
+      padding: 0.5rem 1.4rem; border-radius: 2rem;
+      border: 2px solid var(--charcoal);
+      background: transparent; color: var(--charcoal);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 600; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab.active, .tab:hover { background: var(--charcoal); color: var(--turmeric); }
+    .menu-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .menu-card {
+      background: #fff; border-radius: 1.2rem;
+      overflow: hidden; border: 2px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .menu-card:hover { border-color: var(--saffron); transform: translateY(-4px); }
+    .menu-card-img {
+      width: 100%; height: 180px; object-fit: cover;
+    }
+    .menu-card-body { padding: 1.2rem; }
+    .menu-card-body h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .menu-card-body p { font-size: 0.85rem; color: #666; line-height: 1.5; margin-bottom: 0.9rem; }
+    .menu-card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .price { font-size: 1.2rem; font-weight: 700; color: var(--saffron); }
+    .spice { font-size: 0.8rem; }
+    .add-btn {
+      background: var(--charcoal); color: #fff;
+      border: none; border-radius: 2rem;
+      padding: 0.4rem 1rem; font-weight: 600; font-size: 0.85rem;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .add-btn:hover { background: var(--saffron); }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--charcoal);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: center;
+    }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img {
+      width: 100%; border-radius: 1.2rem;
+      filter: brightness(0.9) saturate(1.2);
+    }
+    .about-accent {
+      position: absolute; top: -1.5rem; right: -1.5rem;
+      width: 140px; height: 140px; border-radius: 50%;
+      background: var(--turmeric);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900; color: var(--charcoal);
+      box-shadow: 4px 4px 0 var(--saffron);
+      text-align: center; line-height: 1.2;
+    }
+    .about-accent strong { font-size: 2rem; }
+    .about-accent span  { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
+    .about-text .section-title { color: var(--cream); }
+    .about-text p { color: #aaa; line-height: 1.8; margin: 1.2rem 0 2rem; font-size: 1rem; }
+    .about-pills { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .pill {
+      border: 2px solid var(--turmeric); color: var(--turmeric);
+      padding: 0.4rem 1.1rem; border-radius: 2rem;
+      font-size: 0.85rem; font-weight: 600;
+    }
+
+    /* ── SPECIALS ── */
+    #specials { background: var(--turmeric); }
+    .specials-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; }
+    .specials-header .section-tag { color: var(--charcoal); opacity: 0.6; }
+    .specials-header .section-title { color: var(--charcoal); }
+    .see-all {
+      background: var(--charcoal); color: var(--turmeric);
+      padding: 0.6rem 1.5rem; border-radius: 2rem;
+      text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      white-space: nowrap; transition: background 0.2s;
+    }
+    .see-all:hover { background: var(--rose); color: #fff; }
+    .specials-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .special-card {
+      flex: 1 1 220px; background: #fff;
+      border-radius: 1.2rem; overflow: hidden;
+      position: relative; transition: transform 0.2s;
+    }
+    .special-card:hover { transform: translateY(-5px); }
+    .special-card img { width: 100%; height: 200px; object-fit: cover; }
+    .special-badge {
+      position: absolute; top: 1rem; left: 1rem;
+      background: var(--rose); color: #fff;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; padding: 0.3rem 0.8rem; border-radius: 2rem;
+    }
+    .special-card-body { padding: 1.1rem; }
+    .special-card-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .special-card-body p { font-size: 0.8rem; color: #888; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--cream); text-align: center; }
+    .testimonials-title { margin-bottom: 3rem; }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem; text-align: left;
+    }
+    .review-card {
+      background: #fff; border-radius: 1.2rem;
+      padding: 1.8rem; border-left: 5px solid var(--saffron);
+      transition: transform 0.2s;
+    }
+    .review-card:hover { transform: translateY(-4px); }
+    .review-stars { color: var(--turmeric); font-size: 1.1rem; margin-bottom: 0.75rem; }
+    .review-text { font-size: 0.95rem; line-height: 1.7; color: #444; margin-bottom: 1.2rem; }
+    .reviewer { display: flex; align-items: center; gap: 0.75rem; }
+    .reviewer-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--saffron); display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 1.1rem;
+      font-weight: 900; color: #fff;
+    }
+    .reviewer-name { font-weight: 600; font-size: 0.95rem; }
+    .reviewer-loc { font-size: 0.8rem; color: #999; }
+
+    /* ── RESERVATION ── */
+    #reservation {
+      background: var(--rose);
+      text-align: center; padding: 5rem;
+    }
+    #reservation .section-tag { color: rgba(255,255,255,0.7); }
+    #reservation .section-title { color: #fff; margin-bottom: 0.5rem; }
+    #reservation p { color: rgba(255,255,255,0.8); margin-bottom: 2.5rem; font-size: 1rem; }
+    .res-form {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      justify-content: center; max-width: 700px; margin: 0 auto;
+    }
+    .res-form input, .res-form select {
+      flex: 1 1 160px; padding: 0.85rem 1.2rem;
+      border: none; border-radius: 2rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      background: rgba(255,255,255,0.2); color: #fff;
+      outline: none;
+    }
+    .res-form input::placeholder { color: rgba(255,255,255,0.6); }
+    .res-form select option { color: var(--charcoal); background: #fff; }
+    .res-submit {
+      background: var(--charcoal); color: var(--turmeric);
+      padding: 0.85rem 2rem; border-radius: 2rem; border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .res-submit:hover { background: var(--turmeric); color: var(--charcoal); transform: scale(1.04); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 3rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900; color: var(--turmeric);
+    }
+    .footer-info { color: #777; font-size: 0.85rem; line-height: 1.8; }
+    .footer-info strong { color: var(--cream); }
+    .footer-socials { display: flex; gap: 0.75rem; }
+    .social-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 2px solid #444; color: #aaa;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 1rem; transition: border-color 0.2s, color 0.2s;
+    }
+    .social-btn:hover { border-color: var(--turmeric); color: var(--turmeric); }
+    .footer-copy { width: 100%; text-align: center; color: #555; font-size: 0.8rem; padding-top: 1.5rem; border-top: 1px solid #2a2a2a; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-visual { height: 320px; }
+      .hero-text { padding: 3rem 1.5rem; }
+      #about { grid-template-columns: 1fr; }
+      section { padding: 4rem 1.5rem; }
+      .stats-bar { gap: 2rem; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .specials-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      #reservation { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Zafran</div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#specials">Specials</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+  </ul>
+  <a href="#reservation" class="nav-cta">Reserve a Table</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <span class="hero-tag">🌶 Open Daily 11am – 11pm</span>
+    <h1 class="hero-title">Bold Flavors.<br><span>Fearless</span> Spice.</h1>
+    <p class="hero-sub">A modern Indian cafe where tradition meets fire. Every dish is crafted to wake up your senses.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">Explore Menu</a>
+      <a href="#reservation" class="btn-outline">Book a Table</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=900&q=80" alt="Indian food spread"/>
+    <div class="hero-badge">
+      <strong>⭐ 4.9</strong>
+      <span>2,400+ Reviews</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Years of Spice</span></div>
+  <div class="stat"><span class="stat-num">80+</span><span class="stat-label">Dishes on Menu</span></div>
+  <div class="stat"><span class="stat-num">15k</span><span class="stat-label">Happy Guests/Month</span></div>
+  <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Fresh Ingredients</span></div>
+</div>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-header">
+    <span class="section-tag">What We Serve</span>
+    <h2 class="section-title">Our <span>Signature</span> Dishes</h2>
+    <div class="menu-tabs">
+      <button class="tab active">All</button>
+      <button class="tab">Starters</button>
+      <button class="tab">Mains</button>
+      <button class="tab">Breads</button>
+      <button class="tab">Desserts</button>
+    </div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&q=80" alt="Butter Chicken"/>
+      <div class="menu-card-body">
+        <h3>Murgh Makhani</h3>
+        <p>Slow-cooked chicken in a velvety tomato-butter gravy with fenugreek.</p>
+        <div class="menu-card-footer">
+          <span class="price">₹380</span>
+          <span class="spice">🌶🌶</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80" alt="Biryani"/>
+      <div class="menu-card-body">
+        <h3>Dum Biryani</h3>
+        <p>Aged basmati layered with spiced lamb, sealed and slow-cooked over coal.</p>
+        <div class="menu-card-footer">
+          <span class="price">₹520</span>
+          <span class="spice">🌶🌶🌶</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80" alt="Paneer Tikka"/>
+      <div class="menu-card-body">
+        <h3>Paneer Tikka</h3>
+        <p>Charcoal-grilled cottage cheese with peppers & chutney. A smoky classic.</p>
+        <div class="menu-card-footer">
+          <span class="price">₹290</span>
+          <span class="spice">🌶</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=600&q=80" alt="Dal Makhani"/>
+      <div class="menu-card-body">
+        <h3>Dal Makhani</h3>
+        <p>Black lentils simmered for 14 hours with cream, tomato & whole spices.</p>
+        <div class="menu-card-footer">
+          <span class="price">₹240</span>
+          <span class="spice">🌶</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=80" alt="Gulab Jamun"/>
+      <div class="menu-card-body">
+        <h3>Gulab Jamun</h3>
+        <p>Soft milk-solid dumplings soaked in rose-cardamom syrup. Served warm.</p>
+        <div class="menu-card-footer">
+          <span class="price">₹160</span>
+          <span class="spice">🍬</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img class="menu-card-img" src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=600&q=80" alt="Masala Chai"/>
+      <div class="menu-card-body">
+        <h3>Masala Chai</h3>
+        <p>Spiced milk tea brewed with ginger, cardamom, cinnamon & cloves.</p>
+        <div class="menu-card-footer">
+          <span class="price">₹80</span>
+          <span class="spice">☕</span>
+          <button class="add-btn">+ Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-wrap">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80" alt="Kitchen"/>
+    <div class="about-accent">
+      <strong>2012</strong>
+      <span>Est. in Jaipur</span>
+    </div>
+  </div>
+  <div class="about-text">
+    <span class="section-tag">Our Story</span>
+    <h2 class="section-title">Cooked with <span>Love</span> & Fire</h2>
+    <p>Zafran was born in the narrow lanes of Jaipur's old city, where our founder Ritu Sharma learned to cook from her grandmother. Every recipe here carries a story — of tradition, of rebellion, of home.</p>
+    <p>We source our spices directly from farmers in Rajasthan, Kerala, and Kashmir. No shortcuts, no compromise. Just honest, bold food that makes you close your eyes with the first bite.</p>
+    <div class="about-pills">
+      <span class="pill">Farm to Table</span>
+      <span class="pill">No MSG</span>
+      <span class="pill">Vegan Options</span>
+      <span class="pill">Award Winning</span>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALS -->
+<section id="specials">
+  <div class="specials-header">
+    <div>
+      <span class="section-tag">Limited Time</span>
+      <h2 class="section-title">Today's <span style="color:var(--rose)">Specials</span></h2>
+    </div>
+    <a href="#menu" class="see-all">See Full Menu →</a>
+  </div>
+  <div class="specials-row">
+    <div class="special-card">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Special 1"/>
+      <span class="special-badge">Chef's Pick</span>
+      <div class="special-card-body">
+        <h3>Laal Maas Thali</h3>
+        <p>Rajasthani red mutton curry with bajre ki roti & raita. ₹680</p>
+      </div>
+    </div>
+    <div class="special-card">
+      <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&q=80" alt="Special 2"/>
+      <span class="special-badge">New</span>
+      <div class="special-card-body">
+        <h3>Saffron Kulfi Falooda</h3>
+        <p>House-made kulfi with rose falooda, basil seeds & dry fruits. ₹190</p>
+      </div>
+    </div>
+    <div class="special-card">
+      <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600&q=80" alt="Special 3"/>
+      <span class="special-badge">Popular</span>
+      <div class="special-card-body">
+        <h3>Peshwari Naan Basket</h3>
+        <p>Assorted stuffed naans fresh from the tandoor. Serves 2. ₹220</p>
+      </div>
+    </div>
+    <div class="special-card">
+      <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80" alt="Special 4"/>
+      <span class="special-badge">Seasonal</span>
+      <div class="special-card-body">
+        <h3>Aam Panna Cooler</h3>
+        <p>Raw mango, cumin & mint — the perfect summer refresher. ₹110</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-title">
+    <span class="section-tag">What Guests Say</span>
+    <h2 class="section-title">Loved by <span>Thousands</span></h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The Dum Biryani is unlike anything I've had in Jaipur. Fragrant, perfectly spiced, and the portions are generous. Will be back every week!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">A</div>
+        <div>
+          <div class="reviewer-name">Arjun Mehta</div>
+          <div class="reviewer-loc">Jaipur, Rajasthan</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Zafran is our family's go-to spot every Sunday. The ambiance, the dal makhani, the chai — everything is just perfect. Feels like home."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">P</div>
+        <div>
+          <div class="reviewer-name">Priya Sharma</div>
+          <div class="reviewer-loc">Delhi, NCR</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"As a food blogger, I've visited 200+ restaurants. Zafran makes the top 5, no question. The Laal Maas alone is worth a trip to Jaipur."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">R</div>
+        <div>
+          <div class="reviewer-name">Rohan Kapoor</div>
+          <div class="reviewer-loc">Mumbai, Maharashtra</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section id="reservation">
+  <span class="section-tag">Reserve Your Spot</span>
+  <h2 class="section-title">Book a Table</h2>
+  <p>Join us for an unforgettable meal. Walk-ins welcome, but reservations recommended on weekends.</p>
+  <div class="res-form">
+    <input type="text" placeholder="Your Name"/>
+    <input type="tel" placeholder="Phone Number"/>
+    <input type="date"/>
+    <select>
+      <option value="">Guests</option>
+      <option>1 Guest</option>
+      <option>2 Guests</option>
+      <option>3–4 Guests</option>
+      <option>5+ Guests</option>
+    </select>
+    <button class="res-submit">Confirm Booking</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Zafran</div>
+  <div class="footer-info">
+    <strong>📍 14, Mirza Ismail Road, Jaipur 302001</strong><br>
+    📞 +91 98765 43210 &nbsp;|&nbsp; ✉️ hello@zafran.in<br>
+    🕐 Mon–Sun: 11:00 AM – 11:00 PM
+  </div>
+  <div class="footer-socials">
+    <a class="social-btn" href="#">𝕏</a>
+    <a class="social-btn" href="#">in</a>
+    <a class="social-btn" href="#">📸</a>
+  </div>
+  <div class="footer-copy">© 2026 Zafran Cafe & Restaurant. All rights reserved.</div>
+</footer>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  // Add button feedback
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.textContent = '✓ Added';
+      btn.style.background = 'var(--mint)';
+      setTimeout(() => { btn.textContent = '+ Add'; btn.style.background = ''; }, 1500);
+    });
+  });
+
+  // Reservation confirm
+  document.querySelector('.res-submit').addEventListener('click', () => {
+    alert('🎉 Table reserved! We'll confirm via WhatsApp shortly.');
+  });
+</script>
+</body>
+</html>
